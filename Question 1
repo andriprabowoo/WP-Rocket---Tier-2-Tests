@@ -1,0 +1,16 @@
+add_action( 'after_rocket_clean_domain', 'purge_superhoster_cache' );
+
+function purge_superhoster_cache() {
+    // Clear SuperHoster's cache here
+}
+
+---------------------------------------------------------------------------
+Make sure the function purge from the superhostes is exist
+
+add_action( 'after_rocket_clean_domain', 'maybe_purge_superhoster_cache' );
+
+function maybe_purge_superhoster_cache() {
+    if ( function_exists( 'purge_superhoster_cache' ) ) {
+        purge_superhoster_cache();
+    }
+}
