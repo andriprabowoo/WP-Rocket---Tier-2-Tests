@@ -1,0 +1,7 @@
+add_filter( 'rocket_lazyload_exclude_src', 'remove_recaptcha_api_js_exclusion' );
+
+function remove_recaptcha_api_js_exclusion( $exclude_src ) {
+    // Remove the "recaptcha/api.js" script from the list of exclusions
+    $exclude_src = array_diff( $exclude_src, array( 'recaptcha/api.js' ) );
+    return $exclude_src;
+}
