@@ -1,0 +1,25 @@
+add_action( 'before_rocket_clean_post', 'log_purged_urls' );
+
+function log_purged_urls( $post_id ) {
+    // Get the post object
+    $post = get_post( $post_id );
+
+    // Log the post URL
+    error_log( 'Purged URL: ' . get_permalink( $post ) );
+
+    // Get the post's taxonomies
+    $taxonomies = get_object_taxonomies( $post );
+    foreach ( $taxonomies as $taxonomy ) {
+        // Get the terms associated with the post
+        $terms = get_the_terms( $post, $taxonomy );
+        if ( ! empty( $terms ) ) {
+            // Log the URLs for the term archive pages
+            foreach ( $terms as $term ) {
+                error_log( 'Purged URL: ' . get_term_link( $term ) );
+            }
+        }
+    }
+
+    // Log the author archive URL
+    error_log( 'Purged URL: ' . get_author_posts_url( $post->post_author ) );
+}
