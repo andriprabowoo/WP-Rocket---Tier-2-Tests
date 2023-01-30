@@ -1,3 +1,5 @@
+When the rocket_clean_post() function runs, it purges the cache for the specific post being updated or deleted, as well as any associated taxonomy and author pages. This includes the URLs for the post itself, the taxonomy archive pages associated with the post (such as category and tag pages), and the author archive page for the post's author.
+
 add_action( 'before_rocket_clean_post', 'log_purged_urls' );
 
 function log_purged_urls( $post_id ) {
